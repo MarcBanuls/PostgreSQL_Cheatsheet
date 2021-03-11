@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 For the examples we will use the tables A, B or C depending on the number of tables needed. The rows of table A will be persons with IDs, name, surname, age and email columns. The table B will be for cars with ID model, brand and year as columns. To create randomized databases there is a webpage named Mockaroo, and with this I can test the different commandos without having to worry about sharing sensitive or personal content.
+<<<<<<< HEAD
 
 
 # Create table
@@ -95,6 +96,30 @@ SELECT * FROM A WHERE surname ILIKE '%ULS';
 
 
 
+=======
+
+
+# Create table
+CREATE TABLE A (
+id BIGSERIAL NOTNULL PRIMARY KEY,
+name VARCHAR(50) NOT NULL,
+surname VARCHAR(50) NOT NULL,
+age INT NOT NULL,
+email VARCHAR(50)
+);
+
+# Erase table
+DROP TABLE A;
+
+# Insert records
+INSERT INTO A (
+name,
+surname,
+age,
+email
+)
+VALUES ('Marc', 'Bañuls', 'MALE', '25','marc.banuls.96@gmail.com');
+>>>>>>> 0c273a04fa70f2ce5cbaf1d61255ff5c35c58b48
 
 
 
