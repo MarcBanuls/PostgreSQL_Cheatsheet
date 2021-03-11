@@ -9,22 +9,30 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+For the examples we will use the tables A, B or C depending on the number of tables needed. The rows of table A will be persons with IDs, name, surname, age and email columns. The table B will be for cars with ID model, brand and year as columns. To create randomized databases there is a webpage named Mockaroo, and with this I can test the different commandos without having to worry about sharing sensitive or personal content.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# Create table
+CREATE TABLE A (
+id BIGSERIAL NOTNULL PRIMARY KEY,
+name VARCHAR(50) NOT NULL,
+surname VARCHAR(50) NOT NULL,
+age INT NOT NULL,
+email VARCHAR(50)
+);
 
-```{r cars}
-summary(cars)
-```
+# Erase table
+DROP TABLE A;
 
-## Including Plots
+# Insert records
+INSERT INTO A (
+name,
+surname,
+age,
+email
+)
+VALUES ('Marc', 'Bañuls', 'MALE', '25','marc.banuls.96@gmail.com');
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
