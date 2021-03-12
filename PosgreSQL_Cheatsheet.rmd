@@ -77,6 +77,25 @@ SELECT * FROM A WHERE age BETWEEN '22' AND '25';
 SELECT * FROM A WHERE surname LIKE '%uls';
 SELECT * FROM A WHERE surname ILIKE '%ULS';
 
+# Group using a column
+SELECT name FROM A GROUP BY age;
+
+# Count repetitions of grouped table
+SELECT name, COUNT(*) FROM A GROUP BY age;
+
+# Select rows that have more or less counts grouped by a column
+SELECT name, COUNT(\*) FROM A GROUP BY  age HAVING COUNT(\*) >10  ORDER BY age;
+
+# Min max average sum
+SELECT ROUND(AVG(age)) FROM A;
+SELECT name, surname, MAX(age) FROM A;
+SELECT SUM(age) FROM A;
+
+# Create or change names of new columns and actual columns
+SELECT age AS age_in_years, age * 365 AS age_in days;
+
+# Select and change content of null rows
+SELECT COALESCE (email, 'Without email') FROM A;
 
 
 
@@ -94,32 +113,6 @@ SELECT * FROM A WHERE surname ILIKE '%ULS';
 
 
 
-
-
-=======
-
-
-# Create table
-CREATE TABLE A (
-id BIGSERIAL NOTNULL PRIMARY KEY,
-name VARCHAR(50) NOT NULL,
-surname VARCHAR(50) NOT NULL,
-age INT NOT NULL,
-email VARCHAR(50)
-);
-
-# Erase table
-DROP TABLE A;
-
-# Insert records
-INSERT INTO A (
-name,
-surname,
-age,
-email
-)
-VALUES ('Marc', 'Bañuls', 'MALE', '25','marc.banuls.96@gmail.com');
->>>>>>> 0c273a04fa70f2ce5cbaf1d61255ff5c35c58b48
 
 
 
