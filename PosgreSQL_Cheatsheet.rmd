@@ -89,6 +89,7 @@ SELECT name, COUNT(\*) FROM A GROUP BY  age HAVING COUNT(\*) >10  ORDER BY age;
 # Min max average sum
 SELECT ROUND(AVG(age)) FROM A;
 SELECT name, surname, MAX(age) FROM A;
+<<<<<<< HEAD
 SELECT SUM(age) FROM A;
 
 # Create or change names of new columns and actual columns
@@ -113,6 +114,9 @@ SELECT COALESCE (email, 'Without email') FROM A;
 
 
 
+=======
+SELECT SUM(age) FROM A
+>>>>>>> cc7a77333aa2c8c1776e9c0eb19cce8eb7412035
 
 
 
