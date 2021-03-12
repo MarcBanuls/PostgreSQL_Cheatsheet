@@ -106,7 +106,15 @@ SELECT NOW()::DATE; Gives only the date of now
 SELECT NOW()::TIME; Gives only the time we are at now
 SELECT NOW() - INTERVAL '2 DAYS'; substracts two days at the date
 
-#
+# Extract concrete date
+SELECT EXTRACT(DAY FROM NOW());
+
+# Calculate age from two dates
+SELECT AGE(NOW(), '02-02-1996') as exact_age FROM A;
+
+# Remove constraint (primary keys for example)
+ALTER TABLE A DROP CONSTRAINT A_pkey;
+
 
 
 
