@@ -172,6 +172,9 @@ UPDATE A car_id = 2 WHERE id = 1;
 # Inner join: only what is related between two tables
 SELECT * FROM A
 JOIN B ON A.B.id = car.id
+you can also use  USING
+SELECT *FROM A
+JOIN B USING (car_id)
 
 # Left join: select everything of A and only things in B related to A
 SELECT * FROM A
