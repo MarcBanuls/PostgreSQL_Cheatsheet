@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-For the examples we will use the tables A, B or C depending on the number of tables needed. The rows of table A will be persons with IDs, name, surname, age and email columns. The table B will be for cars with ID model, brand and year as columns. To create randomized databases there is a webpage named Mockaroo, and with this I can test the different commandos without having to worry about sharing sensitive or personal content.
+For the examples we will use the tables A, B or C depending on the number of tables needed. The rows of table A will be persons with IDs, name, surname, age and email columns. The table B will be for cars with ID, model, brand and price as columns. To create randomized databases there is a webpage named Mockaroo, and with this I can test the different commandos without having to worry about sharing sensitive or personal content.
 <<<<<<< HEAD
 
 
@@ -20,6 +20,13 @@ name VARCHAR(50) NOT NULL,
 surname VARCHAR(50) NOT NULL,
 age INT NOT NULL,
 email VARCHAR(50)
+);
+
+CREATE TABLE B(
+id BIGSERIAL NOT NULL PRIMARY KEY,
+make VARCHAR(100) NOT NULL,
+model VARCHAR(100) NOT NULL,
+price NUMERIC (20, 2) NOT NULL
 );
 
 # Erase table
@@ -115,13 +122,66 @@ SELECT AGE(NOW(), '02-02-1996') as exact_age FROM A;
 # Remove constraint (primary keys for example)
 ALTER TABLE A DROP CONSTRAINT A_pkey;
 
+# Add constraint
+ALTER TABLE A ADD PRIMARY KEY (id);
+ALTER TABLE A ADD CONSTRAINT unique_email UNIQUE (email); also:
+ALTER TABLE A ADD UNIQUE (email);
 
+# Add check contents of column before inserting a row
+ALTER TABLE A ADD CONSTRAINT gender_constraint CHECK (gender = 'FEMALE'::text OR gender = 'MALE')::text;
 
+# Delete rows or 'records'
+DELETE FROM A WHERE id = 1;
 
+# Update rows or records
+UPDATE A SET email = 'email2@gmail.com' WHERE id = 1;
 
+# Prevent error messages on conflict or do something specific on conflict
+INSERT INTO A (name, surname, age, email)
+VALUES ('a', 'aa', 'MALE', '25', 'marc_testmail@gmail.com')
+ON CONFLICT (email) DO NOTHING;
+(this will result in not adding this record due to having same id as before)
 
+INSERT INTO A (name, surname, age, email)
+VALUES ('a', 'aa', 'MALE', '25', 'marc_testmail@gmail.com')
+ON CONFLICT (email) DO UPDATE SET email = EXCLUDED.email;
 
+# Relational databases
+To have relational databases we need a column with the id of one table on another table, in our case:
 
+CREATE TABLE A (
+id BIGSERIAL NOTNULL PRIMARY KEY,
+name VARCHAR(50) NOT NULL,
+surname VARCHAR(50) NOT NULL,
+age INT NOT NULL,
+email VARCHAR(50)
+*car_id BIGINT REFERENCES car (id)*,
+UNIQUE(car_id)
+);
+
+CREATE TABLE B (
+id BIGSERIAL NOT NULL PRIMARY KEY,
+make VARCHAR(100) NOT NULL,
+model VARCHAR(100) NOT NULL,
+price NUMERIC (20, 2) NOT NULL
+);
+
+# Update relational table with foreign key
+UPDATE A car_id = 2 WHERE id = 1;
+
+# Inner join: only what is related between two tables
+SELECT * FROM A
+JOIN B ON A.B.id = car.id
+
+# Left join: select everything of A and only things in B related to A
+SELECT * FROM A
+LEFT JOIN B ON B.id = A.B.id;
+
+# Export results of query to csv file
+\copy (SELECT * FROM A
+JOIN B ON A.B.id = car.id )
+TO '/path/of/directory/results.csv'
+DELIMITER ',' CSV HEADER;
 
 
 
