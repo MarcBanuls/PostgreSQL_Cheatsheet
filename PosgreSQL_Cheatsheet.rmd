@@ -89,7 +89,6 @@ SELECT name, COUNT(\*) FROM A GROUP BY  age HAVING COUNT(\*) >10  ORDER BY age;
 # Min max average sum
 SELECT ROUND(AVG(age)) FROM A;
 SELECT name, surname, MAX(age) FROM A;
-<<<<<<< HEAD
 SELECT SUM(age) FROM A;
 
 # Create or change names of new columns and actual columns
@@ -98,6 +97,16 @@ SELECT age AS age_in_years, age * 365 AS age_in days;
 # Select and change content of null rows
 SELECT COALESCE (email, 'Without email') FROM A;
 
+# If using a number in an operation gives null, use another number?
+SELECT 5 / NULLIF(5,2);
+
+# Timestamps and dates
+SELECT NOW(); Gives full info of the time now
+SELECT NOW()::DATE; Gives only the date of now
+SELECT NOW()::TIME; Gives only the time we are at now
+SELECT NOW() - INTERVAL '2 DAYS'; substracts two days at the date
+
+#
 
 
 
@@ -114,9 +123,33 @@ SELECT COALESCE (email, 'Without email') FROM A;
 
 
 
-=======
-SELECT SUM(age) FROM A
->>>>>>> cc7a77333aa2c8c1776e9c0eb19cce8eb7412035
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
