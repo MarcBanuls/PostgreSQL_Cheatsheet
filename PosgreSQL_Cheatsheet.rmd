@@ -183,7 +183,11 @@ JOIN B ON A.B.id = car.id )
 TO '/path/of/directory/results.csv'
 DELIMITER ',' CSV HEADER;
 
+# change or set sequence
+ALTER SEQUENCE A_id_seq RESTART WITH 10;
 
+# Extensions
+SELECT * FROM pg_available_extension
 
 
 
